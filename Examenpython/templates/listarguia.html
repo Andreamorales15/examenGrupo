@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Lista de Guías</h2>
+  
+  {% if guias %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre de la Guía</th>
+          <th>Descripción</th>
+          <th>Programa de Formación</th>
+          <th>Documento</th>
+          <th>Fecha</th>
+          <th>Instructor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for guia in guias %}
+          <tr>
+            <td>{{ guia.nombreguia }}</td>
+            <td>{{ guia.descripcions }}</td>
+            <td>{{ guia.programaformacion }}</td>
+            <td>{{ guia.documento }}</td>
+            <td>{{ guia.fecha }}</td>
+            <td>{{ guia.intructordeproceso.nombrecompleto }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No se encontraron guias registradas.</p>
+  {% endif %}
+</div>
+{% endblock %}

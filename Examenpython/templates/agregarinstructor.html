@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Agregar Instructor</h1>
+
+    <div id="alert-container" data-estado="{{ estado }}" data-mensaje="{{ mensaje }}" style="display: none;"></div>
+
+    <form id="formInstructor" method="POST">
+        <label for="nombrecompleto">Nombre Completo:</label><br>
+        <input type="text" id="nombrecompleto" name="nombrecompleto" required><br><br>
+
+        <label for="correoelectronico">Correo Electrónico:</label><br>
+        <input type="email" id="correoelectronico" name="correoelectronico" required><br><br>
+
+        <label for="sena">Centro SENA:</label><br>
+        <select id="sena" name="sena" required>
+            <option value="">-- Selecciona un centro --</option>
+            {% for s in senas %}
+                <option value="{{ s.id }}">{{ s.nombre }}</option>
+            {% endfor %}
+        </select><div><br>
+
+        <button type="submit">Guardar Instructor</button>
+    </form>
+</div>
+{% endblock %}
