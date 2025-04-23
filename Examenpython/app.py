@@ -22,7 +22,7 @@ CORS(app)
 app.config["UPLOAD_FOLDER"] = "./static/img"
 
 app.config["MONGODB_SETTINGS"] = [{
-    "db": "ActividadExamen",
+    "db": "ActividaddExamen",
     "host": os.getenv("MONGO_URI"),
     "port": 27017
 }]
@@ -32,6 +32,8 @@ db = MongoEngine(app)
 
 from routers.sena import *
 from routers.instrutor import * 
+from routers.login import * 
+from routers.guias import * 
 
 
 if __name__ == "__main__":

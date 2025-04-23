@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h2>Agregar Género</h2>
-    <form method="POST" action="/agregarsena/" id="formSena">
-        <div class="form-group">
-            <label for="formGroupExampleInput">Nombre del Sena</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Agregar Sena" required>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Agregar Género</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/agregarsena/" id="formSena">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Nombre del Sena</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Agregar Sena" required>
+                        </div>
+                        <br>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-danger">Guardar Sena</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <br>
-        <button type="submit" class="btn btn-success">Guardar Sena</button>
-    </form>
+    </div>
 
     <div id="alert-container" data-estado="{{ estado }}" data-mensaje="{{ mensaje }}"></div>
 </div>
-
 {% endblock %}

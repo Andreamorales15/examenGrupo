@@ -1,27 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1>Agregar Instructor</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Agregar Instructor</h3>
+                </div>
+                <div class="card-body">
+                    <div id="alert-container" data-estado="{{ estado }}" data-mensaje="{{ mensaje }}" style="display: none;"></div>
 
-    <div id="alert-container" data-estado="{{ estado }}" data-mensaje="{{ mensaje }}" style="display: none;"></div>
-
-    <form id="formInstructor" method="POST">
-        <label for="nombrecompleto">Nombre Completo:</label><br>
-        <input type="text" id="nombrecompleto" name="nombrecompleto" required><br><br>
-
-        <label for="correoelectronico">Correo Electrónico:</label><br>
-        <input type="email" id="correoelectronico" name="correoelectronico" required><br><br>
-
-        <label for="sena">Centro SENA:</label><br>
-        <select id="sena" name="sena" required>
-            <option value="">-- Selecciona un centro --</option>
-            {% for s in senas %}
-                <option value="{{ s.id }}">{{ s.nombre }}</option>
-            {% endfor %}
-        </select><div><br>
-
-        <button type="submit">Guardar Instructor</button>
-    </form>
+                    <form id="formInstructor" method="POST">
+                        <div class="form-group">
+                            <label for="nombrecompleto">Nombre Completo:</label>
+                            <input type="text" id="nombrecompleto" name="nombrecompleto" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="correoelectronico">Correo Electrónico:</label>
+                            <input type="email" id="correoelectronico" name="correoelectronico" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sena">Centro SENA:</label>
+                            <select id="sena" name="sena" class="form-control" required>
+                                <option value="">-- Selecciona un centro --</option>
+                                {% for s in senas %}
+                                    <option value="{{ s.id }}">{{ s.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <button type="submit" class="btn btn-warning">Guardar Instructor</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
