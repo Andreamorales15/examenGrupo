@@ -10,8 +10,6 @@ def index():
 
 @app.route("/agregarsena/",methods=['GET', 'POST'])
 def addGenero():
-    if 'instructor_id' not in session:
-        return redirect(url_for('login'))
     try:
         mensaje=None
         estado=False
