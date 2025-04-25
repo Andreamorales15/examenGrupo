@@ -49,7 +49,7 @@ def enviar_correo(destinatario, contrasena):
     try:
         with app.app_context():
             asunto = "Contraseña para acceso"
-            cuerpo = f"HolaTu contraseña  es: {contrasena}"
+            cuerpo = f"Hola Tu contraseña  es: {contrasena}"
             mensaje = Message(asunto, recipients=[destinatario])
             mensaje.body = cuerpo
             mail.send(mensaje)

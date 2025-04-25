@@ -19,8 +19,13 @@
                             <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripción" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="programaformacion">Programa de Formación</label>
-                            <input type="text" class="form-control" id="programaformacion" name="programaformacion" placeholder="Programa de Formación" required>
+                            <label for="programaformacion">Programa de Formación:</label>
+                        <select name="programaformacion" id="programaformacion" required>
+                        <option value="">-- Selecciona un programa --</option>
+                        {% for prog in programa %}
+                        <option value="{{ prog.id }}">{{ prog.nombre }}</option>
+                        {% endfor %}</select
+                        ><br /><br />
                         </div>
                         <div class="form-group">
                             <label for="fecha">Fecha</label>

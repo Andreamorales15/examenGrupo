@@ -1,6 +1,7 @@
 from flask import render_template, request, send_from_directory,flash, redirect, url_for, session
 from models.guia import Guia
 from models.intructor import NombreIntructor
+from models.programas import NombredelPrograma
 from app import app
 from werkzeug.utils import secure_filename
 import os
@@ -15,8 +16,8 @@ def upload_pdf(filename):
 
 @app.route("/listarguia", methods=["GET"])
 def listar_guias():
-    if 'instructor_id' not in session:
-        return redirect(url_for('login'))
+    # if 'instructor_id' not in session:
+    #     return redirect(url_for('login'))
     guias = Guia.objects()
     return render_template("listarguia.html", guias=guias)
 
@@ -29,16 +30,18 @@ def es_archivo_permitido(nombre_archivo):
 
 @app.route("/agregarguia/", methods=["GET", "POST"])
 def agregar_guia():
-    if 'instructor_id' not in session:
-        return redirect(url_for('login'))
+    # if 'instructor_id' not in session:
+    #     return redirect(url_for('login'))
     mensaje = None
     instructores = NombreIntructor.objects()
+    programa = NombredelPrograma.objects()
 
     if request.method == "POST":
         try:
             nombreguia = request.form.get("nombreguia")
             descripcion = request.form.get("descripcion")
-            programa_formacion = request.form.get("programaformacion")
+            programa_id = request.form.get("programaformacion")
+            programa_ref = NombredelPrograma.objects(id=programa_id).first()
             fecha = request.form.get("fecha")
             instructor_id = request.form.get('instructor_id')
             instructor = NombreIntructor.objects(id=instructor_id).first()
@@ -77,7 +80,8 @@ def agregar_guia():
             nueva_guia = Guia(
                 nombreguia=nombreguia,
                 descripcion=descripcion,
-                programaformacion=programa_formacion,
+                programaformacion=programa_ref.nombre,
+                programa=programa_ref,
                 documento=nombre_archivo, 
                 fecha=fecha,
                 instructor=instructor
@@ -99,4 +103,4 @@ def agregar_guia():
                 mensaje=mensaje
             )
 
-    return render_template("agregarguia.html", instructores=instructores, mensaje=None)
+    return render_template("agregarguia.html", instructores=instructores, mensaje=mensaje,programa=programa)

@@ -1,22 +1,12 @@
 document
-  .getElementById("formInstructor")
+  .getElementById("formprograma")
   .addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nombrecompleto = document.getElementById("nombrecompleto").value;
-    const correoelectronico =
-      document.getElementById("correoelectronico").value;
-    const sena = document.getElementById("sena").value;
-    
+    const nombreSena = document.getElementById("nombre").value;
+    const data = { nombre: nombreSena };
 
-    const data = {
-      nombrecompleto: nombrecompleto,
-      correoelectronico: correoelectronico,
-      sena: sena,
-     
-    };
-
-    fetch("/agregarinstructor/", {
+    fetch("/agregarprograma/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,14 +14,16 @@ document
       body: JSON.stringify(data),
     })
       .then((response) => response.text())
-      .then((html) => {
+      .then((data) => {
         const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
+        const doc = parser.parseFromString(data, "text/html");
 
-        const alertContainer = doc.querySelector("#alert-container");
-        const estado = alertContainer.getAttribute("data-estado");
-        const mensaje = alertContainer.getAttribute("data-mensaje");
-
+        const estado = doc
+          .querySelector("#alert-container")
+          .getAttribute("data-estado");
+        const mensaje = doc
+          .querySelector("#alert-container")
+          .getAttribute("data-mensaje");
         if (estado === "True") {
           Swal.fire({
             icon: "success",
@@ -39,7 +31,7 @@ document
             text: mensaje,
             confirmButtonText: "Aceptar",
           }).then(() => {
-            window.location.href = "/";
+            window.location.href = "/agregarprograma/";
           });
         } else {
           Swal.fire({
@@ -51,6 +43,7 @@ document
         }
       })
       .catch((error) => {
+        Swal.fire("Error en la solicitud", error);
         Swal.fire({
           icon: "error",
           title: "¡Algo salió mal!",

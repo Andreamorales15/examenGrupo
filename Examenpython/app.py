@@ -34,6 +34,7 @@ from routers.sena import *
 from routers.instrutor import * 
 from routers.login import * 
 from routers.guias import * 
+from routers.programas import * 
 
 
 if __name__ == "__main__":
